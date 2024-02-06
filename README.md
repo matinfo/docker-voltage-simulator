@@ -2,7 +2,7 @@
 
 Simple NodeJS server to fake random voltage data in a simple HTML page for developments
 
-> Note: use nodemon, is only dev purpose. All changes made in `src` directory do a hot reload!
+> Note: use nodemon, is only for dev purpose. All changes made in `src` directory do a hot reload!
 
 # Usage
 
