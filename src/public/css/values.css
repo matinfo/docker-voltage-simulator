@@ -1,0 +1,21 @@
+.main-box {
+  margin: 10px;
+  font-family: monospace;
+}
+
+.main-box table {
+  width: 195px;
+    padding: 5px;
+}
+
+.main-box .values {
+  background-color: lightgrey;
+}
+
+.main-box .value {
+  width: 70px;
+  text-align: right;
+}
+.main-box .values .l1 { color: red; }
+.main-box .values .l2 { color: yellow; }
+.main-box .values .l3 { color: blue; }
