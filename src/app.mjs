@@ -21,4 +21,14 @@ app.get("/values", async (req, res) => {
   res.sendFile(_retfile);
 });
 
+app.get("/pv", async (req, res) => {
+
+  // show the page
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  const _retfile = path.join(__dirname, 'pv.html');
+
+  res.sendFile(_retfile);
+});
+
 app.listen(PORT, () => console.log(`Server up at PORT:${PORT}`));
