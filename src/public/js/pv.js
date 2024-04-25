@@ -1,3 +1,6 @@
+
+const refreshEverySecond = 1;
+
 function getDateTimeNow() {
   let date_time = new Date();
 
@@ -90,5 +93,5 @@ setInterval(() => {
   valuePVGeneratorA3.innerHTML = parseFloat(ampereValues.L3).toFixed(2);
   valueOutputPowerW3.innerHTML = parseFloat(tensionValues.L3 * ampereValues.L3).toFixed(2);
 
-}, 5 * 1000);
+}, refreshEverySecond * 1000);
 

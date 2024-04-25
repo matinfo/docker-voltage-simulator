@@ -7,6 +7,6 @@ Simple NodeJS server to fake random voltage data in a simple HTML page for devel
 # Usage
 
 - Execute `docker compose up -d`.
-- Go to http://localhost:8800/values
+- Go to http://localhost:8800/pv
 
 
