@@ -2,39 +2,39 @@
 const refreshEverySecond = 1;
 
 function getDateTimeNow() {
-  let date_time = new Date();
+  const date_time = new Date();
 
   // get current date
   // adjust 0 before single digit date
-  let date = ("0" + date_time.getDate()).slice(-2);
+  const date = ("0" + date_time.getDate()).slice(-2);
   // get current month
-  let month = ("0" + (date_time.getMonth() + 1)).slice(-2);
+  const month = ("0" + (date_time.getMonth() + 1)).slice(-2);
   // get current year
-  let year = date_time.getFullYear();
+  const year = date_time.getFullYear();
   // get current hours
-  let hours = date_time.getHours();
+  const hours = date_time.getHours();
   // get current minutes
-  let minutes = date_time.getMinutes();
+  const minutes = date_time.getMinutes();
   // get current seconds
-  let seconds = date_time.getSeconds();
+  const seconds = date_time.getSeconds();
   // return date & time in YYYY-MM-DD HH:MM:SS format
   return year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
 }
 
 function generateFakeValuesV() {
-    // Generate random tension values between 0 and 240V
-    const L1 = Math.random() * 240;
-    const L2 = Math.random() * 240;
-    const L3 = Math.random() * 240;
+    // Generate random tension values between 0 and 200V
+    const L1 = Math.random() * 200;
+    const L2 = Math.random() * 200;
+    const L3 = Math.random() * 200;
 
     return { L1, L2, L3 };
 }
 
 function generateFakeValuesA() {
-  // Generate random ampere values between 0 and 240V
-  const L1 = Math.random() * 24;
-  const L2 = Math.random() * 24;
-  const L3 = Math.random() * 24;
+  // Generate random ampere values between 0 and 50A
+  const L1 = Math.random() * 50;
+  const L2 = Math.random() * 50;
+  const L3 = Math.random() * 50;
 
   return { L1, L2, L3 };
 }
@@ -64,6 +64,7 @@ const valuePVGeneratorA3 = document.querySelectorAll('[width="70"][align="right"
 const valueOutputPowerW3 = document.querySelectorAll('[width="70"][align="right"]')[15];
 
 let timerInSeconds = 0;
+const pv_efficiency_percent = 0.9;
 
 setInterval(() => {
   timerInSeconds += 1;
@@ -74,23 +75,29 @@ setInterval(() => {
   refreshTimer.innerHTML = getDateTimeNow();
 
   // actual power
-  valuePowerACW.innerHTML = parseFloat(tensionValues.L1 * ampereValues.L1+tensionValues.L2 * ampereValues.L2+tensionValues.L3 * ampereValues.L3).toFixed(2);
+  valuePowerACW.innerHTML = parseFloat(tensionValues.L1 * ampereValues.L1 +
+                                        tensionValues.L2 * ampereValues.L2 + 
+                                        tensionValues.L3 * ampereValues.L3).toFixed(2);
+  
   // L1
-  valuePVGeneratorV1.innerHTML = parseFloat(tensionValues.L1).toFixed(2);
+  valuePVGeneratorV1.innerHTML = parseFloat(tensionValues.L1 / pv_efficiency_percent ).toFixed(2);
+  valuePVGeneratorA1.innerHTML = parseFloat(ampereValues.L1 / pv_efficiency_percent).toFixed(2);
+
   valueOutputPowerV1.innerHTML = parseFloat(tensionValues.L1).toFixed(2);
-  valuePVGeneratorA1.innerHTML = parseFloat(ampereValues.L1).toFixed(2);
   valueOutputPowerW1.innerHTML = parseFloat(tensionValues.L1 * ampereValues.L1).toFixed(2);
 
   // L2
-  valuePVGeneratorV2.innerHTML = parseFloat(tensionValues.L2).toFixed(2);
+  valuePVGeneratorV2.innerHTML = parseFloat(tensionValues.L2 / pv_efficiency_percent).toFixed(2);
+  valuePVGeneratorA2.innerHTML = parseFloat(ampereValues.L2 / pv_efficiency_percent).toFixed(2);
+
   valueOutputPowerV2.innerHTML = parseFloat(tensionValues.L2).toFixed(2);
-  valuePVGeneratorA2.innerHTML = parseFloat(ampereValues.L2).toFixed(2);
   valueOutputPowerW2.innerHTML = parseFloat(tensionValues.L2 * ampereValues.L2).toFixed(2);
 
   // L3
-  valuePVGeneratorV3.innerHTML = parseFloat(tensionValues.L3).toFixed(2);
+  valuePVGeneratorV3.innerHTML = parseFloat(tensionValues.L3 / pv_efficiency_percent).toFixed(2);
+  valuePVGeneratorA3.innerHTML = parseFloat(ampereValues.L3 / pv_efficiency_percent).toFixed(2);
+
   valueOutputPowerV3.innerHTML = parseFloat(tensionValues.L3).toFixed(2);
-  valuePVGeneratorA3.innerHTML = parseFloat(ampereValues.L3).toFixed(2);
   valueOutputPowerW3.innerHTML = parseFloat(tensionValues.L3 * ampereValues.L3).toFixed(2);
 
 }, refreshEverySecond * 1000);
